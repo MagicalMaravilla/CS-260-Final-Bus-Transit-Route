@@ -1,0 +1,61 @@
+int main() {
+    // Implementation of tests and demonstration of Graph class functionalities.
+    Graph g;
+
+    // Adding vertices
+    cout << "Adding vertices A through J." << endl;
+    for (char vertex = 'A'; vertex <= 'J'; ++vertex) {
+        g.add_vertex(vertex);
+    }
+
+    // Defining edges based on bus routes
+    cout << "\nDefining bus routes as edges with distances." << endl;
+    vector<tuple<char, char, int>> routes = {
+        {'A', 'B', 50}, {'A', 'D', 150}, {'A', 'E', 200}, {'B', 'C', 40},
+        {'B', 'E', 60}, {'C', 'G', 120}, {'D', 'E', 90}, {'E', 'F', 80},
+        {'F', 'G', 70}, {'G', 'H', 100}, {'G', 'I', 60}, {'H', 'I', 80},
+        {'H', 'J', 140}, {'I', 'J', 120}
+    };
+    for (const auto& [start, end, distance] : routes) {
+        g.add_edge(start, end, distance);
+    }
+
+    // Invalid inputs tests
+    cout << "\nTesting response to invalid inputs:" << endl;
+    g.add_edge('A', 'Z', 10);  // Non-existent vertex
+    g.add_edge('A', 'B', -5);  // Invalid weight
+
+    // Shortest paths tests
+    cout << "\nTesting shortest path calculations:" << endl;
+    auto printPath = [](const string& description, const vector<char>& path) {
+        cout << description << ": ";
+        for (char p : path) cout << p << " ";
+        cout << endl;
+    };
+
+    printPath("Shortest path from A to B", g.shortest_path('A', 'B'));
+    printPath("Shortest path from A to F", g.shortest_path('A', 'F'));
+    printPath("Shortest path from A to J", g.shortest_path('A', 'J'));
+    printPath("Shortest path from A to Z (expected failure)", g.shortest_path('A', 'Z'));
+
+    // Extended testing for paths back to home bases A and J from other vertices
+cout << "\nTesting shortest paths to home bases A and J:" << endl;
+vector<char> vertices = {'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
+for (char vertex : vertices) {
+    // Testing paths to home base A
+    string descriptionToA = "Shortest path from " + string(1, vertex) + " to A";
+    vector<char> pathToA = g.shortest_path(vertex, 'A');
+    printPath(descriptionToA, pathToA);
+
+    // Testing paths to home base J
+    string descriptionToJ = "Shortest path from " + string(1, vertex) + " to J";
+    vector<char> pathToJ = g.shortest_path(vertex, 'J');
+    printPath(descriptionToJ, pathToJ);
+}
+
+    // MST test
+    cout << "\nConstructing and testing the Minimum Spanning Tree:" << endl;
+    g.min_span_tree();
+
+    return 0;
+}
