@@ -1,0 +1,15 @@
+Start route   End route     miles
+A                 B           50
+A                 D           150
+A                 E           200
+B                 C            40
+B                 E            60
+C                 G           120
+D                 E            90
+E                 F            80
+F                 G            70
+G                 H           100
+G                 I            60
+H                 I            80
+H                 J           140
+I                 J           120

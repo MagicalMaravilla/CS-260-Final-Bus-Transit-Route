@@ -1,0 +1,35 @@
+add_vertex(char vertex_name)
+
+Time Complexity: O(logV) where V is the number of vertices.
+This is because the operation involves searching within a 'std::map', which is typically found in a balanced binary search tree with logarithmic search, insertion, and deletion.
+Space Complexity: O(V) as adding more vertices increases the storage lineraly with the number of vertices.
+
+
+
+add_edge(char source, char destination, int weight)
+
+Time Complexity: O(logV) for the same reasons as add_vertex with the addition that it perofrms two searches for a destination and one insertion into the adjacency list. Since each vertex adjacency list is a vector
+appending an edge is O(1) (constant time), but the overall complexity is dominated by the map operations.
+
+Space Complexity O(E), as each edge directly increases the storage used by the adjacency list. (for undirected graphs, each edge is stored twice)
+
+
+Shortest_path(char source, char destination)
+(Dijkstras algo implmentation)
+Time complexity: O((V+E)logV), because of the use of a priority queue. 
+Each vertex can be added or extracted from the priority queue, this leads to O(VlogV) complexity and each edge is examined at most once during the process.
+
+Space Complexity: O(V) for the storage of distances, predecessors, aand the priorty queue. The space required for the set of visited verticies is also O(V)
+
+min_span_tree()
+(Prim's algo implementation)
+Time Complexity: O((V+E)logV) similar to Dijkstra's algo. The algo iteratively extracts the minimum edge from the priorty queueand examines adjacent verticies, with each edge's consideration taking O(logV) time,
+becaues of because of priorityqueue operations
+
+Space complexity O(V+E) for the MST and the priority queue. 
+The space complexity considers both the storage for the MST and the intermediate structures used during the algorithm(aka the priority queue, set of vertices included in the MST)
+
+
+
+General Sources:
+(https://www.youtube.com/watch?v=QnRx6V8YQy0&ab_channel=CalebCurry)
